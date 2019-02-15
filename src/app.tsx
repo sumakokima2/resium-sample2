@@ -2,16 +2,22 @@ import React from "react";
 import { hot } from "react-hot-loader";
 import { Cartesian3 } from "cesium";
 import { Viewer, Entity } from "resium";
+import Earth from './earth';
 
-const App = () => (
-  <Viewer full>
-    <Entity
-      name="Tokyo"
-      position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
-      point={{ pixelSize: 10 }}
-      description="hoge"
-    />
-  </Viewer>
-);
+interface State {
+}
+
+class App extends React.PureComponent<{}, State> {
+  state = {
+  };
+
+  public render() {
+    return <Earth />;
+  }
+}
 
 export default hot(module)(App);
+  
+  
+  
+// export default hot(module)(App);

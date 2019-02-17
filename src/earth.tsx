@@ -3,19 +3,40 @@ import { Viewer, Entity } from "resium";
 import { Cartesian3 } from "cesium";
 import Pin from "./pin";
 
-export default class Earth extends React.Component<any, any> {
-    constructor(props: any){
+interface Data {
+    id: string;
+    name: string;
+    show: boolean;
+  }
+
+interface Props {
+    pins: Data[];
+  }
+  interface State {
+    listItems:string;
+  }
+
+export default class Earth extends React.Component<Props, State> {
+    constructor(props: Props){
         super(props);
     }
+    
 
-
-    public render() {
+    render() {
+        console.log(this.listItems);
         return (
             <Viewer full>
-      <Pin defaultName='World' />
-
-    
-      </Viewer>
+                {this.props.pins.map((d, i) => {
+                 return (
+                    <Pin defaultName={d.name} />
+                 );
+                })}
+                <form>
+          <ul>
+              
+          </ul>
+        </form>
+            </Viewer>
         );
     }
 }

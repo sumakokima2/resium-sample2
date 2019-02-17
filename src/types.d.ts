@@ -40,17 +40,5 @@ declare module "*.css" {
 
 interface Data {
   id: string;
-  lat: number;
-  lon: number;
-  image: string;
-  personalimage: string;
-  regionName: string;
-  groupName: string;
-  title: string;
   name: string;
-  postcode: string;
-  address: string;
-  company: string;
-  zokusei_key: string;
-  zokusei_jp: string;
 }

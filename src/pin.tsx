@@ -6,7 +6,7 @@ import { Viewer, Entity } from "resium";
 export default class Pin extends React.Component<any, any> {
     constructor(props: any){
         super(props);
-        this.state = { name: this.props.defaultName };
+        this.state = { name: this.props.name };
     }
 
     public handleChange(event: any) : void {

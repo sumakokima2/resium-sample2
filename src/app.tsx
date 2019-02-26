@@ -7,6 +7,7 @@ import loadData from "./data_app";
 interface Data {
   id: string;
   name: string;
+  show: boolean;
 }
 
 interface State {

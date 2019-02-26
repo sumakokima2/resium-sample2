@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Viewer, Entity } from "resium";
 import Pin from "./pin";
-import List from "./list";
+import Image from "./image";
+
 interface Data {
     id: string;
     name: string;
@@ -37,6 +38,7 @@ export default class Earth extends React.Component<Props, State> {
                     <Pin name={d.name} id={d.id} show={this.state.pinsshow[i]}/>
                  );
                 })}
+                <Image />
                 <form id="makiko">
           <ul>
           {this.props.pins.map((d, i) => {
@@ -63,11 +65,11 @@ export default class Earth extends React.Component<Props, State> {
     private clickAction = (e: any) => {
         const target = e.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
-        console.log("a"+target.checked);
+        console.log(this.state.pinsshow[target.id]+"a"+target.checked);
         const copy = this.state.pinsshow.slice();
-        copy[target.id] = target.checked;
-        this.setState({pinsshow:copy});
-        console.log(this.state.pinsshow[target.id]);
+        copy[Number(target.id)] = target.checked;
+        this.setState({pinsshow : copy});
+        console.log(copy[target.id]+"aa"+this.state.pinsshow[target.id]);
     };
 
     }

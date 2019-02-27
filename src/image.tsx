@@ -12,6 +12,10 @@ const imageryProvider = new (Cesium as any).SingleTileImageryProvider({
   export default class Image extends React.Component<any, any> {
     constructor(props: any){
         super(props);
+        this.state = { 
+            name: this.props.name, 
+            image:this.props.image
+        };
     }
 
     public render() {
@@ -23,7 +27,10 @@ const imageryProvider = new (Cesium as any).SingleTileImageryProvider({
           <ImageryLayer
             // rectangle={Cesium.Rectangle.fromDegrees(-97.5, 25.0, -88.0, 35.0)}
             alpha={0.5}
-            imageryProvider={imageryProvider}
+            imageryProvider={new (Cesium as any).SingleTileImageryProvider({
+                url: "./src/"+this.state.image+".png",
+                rectangle: (Cesium as any).Rectangle.fromDegrees(31.416667,34.333333, 34.416667,35.333333)
+              }) }
           />
         </Entity>
         );

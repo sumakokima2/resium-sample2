@@ -9,11 +9,21 @@ interface Data {
     show: boolean;
   }
 
+interface ImageData {
+    id: string;
+    name: string;
+    show: boolean;
+    image:string;
+  }
+
 interface Props {
     pins: Data[];
+    images:ImageData[];
   }
-  interface State {
+
+interface State {
     pinsshow: boolean[];
+    imagesshow: boolean[];
     pinsboolean:boolean;
   }
 
@@ -23,6 +33,7 @@ export default class Earth extends React.Component<Props, State> {
         super(props);
         this.state = {
             pinsshow: [true,true],
+            imagesshow: [true,true],
             pinsboolean:true
           };
           
@@ -38,27 +49,49 @@ export default class Earth extends React.Component<Props, State> {
                     <Pin name={d.name} id={d.id} show={this.state.pinsshow[i]}/>
                  );
                 })}
-                <Image />
-                <form id="makiko">
-          <ul>
-          {this.props.pins.map((d, i) => {
+                {this.props.images.map((d, i) => {
                  return (
-                    <li>
-                    <label>{d.name}</label>
-                        <input type="checkbox" 
-                        id={d.id} 
-                        key={d.id} 
+                    <Image name={d.name} id={d.id} show={this.state.imagesshow[i]} image={d.image}/>
+                    );
+                })}
+                <form id="makiko">
+                    <ul>
+                        {this.props.pins.map((d, i) => {
+                        return (
+                            <li>
+                                <label>{d.name}</label>
+                                <input type="checkbox" 
+                                    id={d.id} 
+                                    key={d.id} 
                         
-                        checked={this.state.pinsshow[i]}
-                        onClick={this.clickAction} 
-                         />
-                {d.name}
-              </li>
-            );
-            })}
-          </ul>
-
-        </form>
+                                    checked={this.state.pinsshow[i]}
+                                    onClick={this.clickAction} 
+                                />
+                                {d.name}
+                            </li>
+                        );
+                        })}
+                    </ul>
+                </form>
+                <form id="imagelist">
+                    <ul>
+                        {this.props.images.map((d, i) => {
+                        return (
+                            <li>
+                                <label>{d.name}</label>
+                                <input type="checkbox" 
+                                    id={d.id} 
+                                    key={d.id} 
+                        
+                                    checked={this.state.imagesshow[i]}
+                                    onClick={this.clickAction1} 
+                                />
+                                {d.name}
+                            </li>
+                        );
+                        })}
+                    </ul>
+                </form>
             </Viewer>
         );
     }
@@ -70,6 +103,15 @@ export default class Earth extends React.Component<Props, State> {
         copy[Number(target.id)] = target.checked;
         this.setState({pinsshow : copy});
         console.log(copy[target.id]+"aa"+this.state.pinsshow[target.id]);
+    };
+    private clickAction1 = (e: any) => {
+        const target = e.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        console.log(this.state.imagesshow[target.id]+"a"+target.checked);
+        const copy = this.state.imagesshow.slice();
+        copy[Number(target.id)] = target.checked;
+        this.setState({imagesshow : copy});
+        console.log(copy[target.id]+"aa"+this.state.imagesshow[target.id]);
     };
 
     }

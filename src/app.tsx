@@ -3,6 +3,7 @@ import { hot } from "react-hot-loader";
 
 import Earth from './earth';
 import loadData from "./data_app";
+import loadImage from "./loadimage";
 
 interface Data {
   id: string;
@@ -10,16 +11,27 @@ interface Data {
   show: boolean;
 }
 
+interface ImageData {
+  id: string;
+  name: string;
+  show: boolean;
+  image: string;
+}
+
+
 interface State {
   data:Data[];
+  imagedata:ImageData[];
 }
 
 class App extends React.PureComponent<{}, State> {
   state = {
-    data: []
+    data: [],
+    imagedata: []
   };
   componentDidMount() {
     this.loadData();
+    this.loadImage();
     
   }
 
@@ -29,10 +41,15 @@ class App extends React.PureComponent<{}, State> {
       data: result.data,
     });
   }
-
+  async loadImage() {
+    const result = await loadImage();
+    this.setState({
+      imagedata: result.data,
+    });
+  }
 
   render() {
-    return <Earth pins={this.state.data}/>;
+    return <Earth pins={this.state.data} images={this.state.imagedata}/>;
   }
 }
 

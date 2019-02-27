@@ -5,6 +5,8 @@ import Earth from './earth';
 import loadData from "./data_app";
 import loadImage from "./loadimage";
 
+import "./style.css";
+
 interface Data {
   id: string;
   name: string;

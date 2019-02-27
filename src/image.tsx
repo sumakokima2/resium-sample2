@@ -5,7 +5,7 @@ import { SingleTileImageryProvider } from "cesium";
 import { Entity, ImageryLayer } from "resium";
 
 const imageryProvider = new SingleTileImageryProvider({
-    url: "../map01.png",
+    url: "./map01.png",
     rectangle: Cesium.Rectangle.fromDegrees(31.416667,34.333333, 34.416667,35.333333)
   });
 

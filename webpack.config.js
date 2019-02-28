@@ -6,26 +6,10 @@ const webpack = require("webpack");
 const HtmlPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlIncludeAssetsPlugin = require("html-webpack-include-assets-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 
 module.exports = (env, args) => {
   const prod = args.mode === "production";
-  const extractCSS = new ExtractTextPlugin(`style${prod ? ".[chunkhash]" : ""}.css`);
-  const cssLoaders = [
-    {
-      loader: "css-loader",
-      options: {
-        camelCase: true,
-        importLoaders: 1,
-        localIdentName: "[local]_[hash:base64:5]",
-        minimize: false, // minimized by OptimizeCssAssetsPlugin
-        modules: true,
-        sourceMap: !prod,
-      },
-    },
-    "postcss-loader",
-  ];
   return {
     context: __dirname,
     devServer: {
@@ -64,16 +48,7 @@ module.exports = (env, args) => {
           exclude: /node_modules/,
           use: "babel-loader",
         },
-        {
-          test: /\.css$/,
-          exclude: /node_modules/,
-          use: prod
-            ? extractCSS.extract({
-                fallback: "style-loader",
-                use: cssLoaders,
-              })
-            : ["style-loader", ...cssLoaders],
-        },
+  
       ],
     },
     output: {

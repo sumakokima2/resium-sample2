@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Viewer, Entity } from "resium";
 import Pin from "./pin";
 import Image from "./image";
+import styled from 'styled-components';
+
 
 interface Data {
     id: string;
@@ -27,7 +29,25 @@ interface State {
     pinsboolean:boolean;
   }
 
-  
+  const LISTMENU = styled.div`
+  font-size: 1.0em;
+  text-align: left;
+  color: #ffffff;
+  display: block;
+  width:200px;
+  background: #666666;
+  position: absolute;
+  top: 0px;
+`;
+
+  const Package = styled.div`
+  display: block;
+`;
+
+const Package1 = styled.div`
+display: block;
+`;
+
 export default class Earth extends React.Component<Props, State> {
     constructor(props: Props){
         super(props);
@@ -42,7 +62,6 @@ export default class Earth extends React.Component<Props, State> {
 
     render() {
         return (
-            
             <Viewer full>
                 {this.props.pins.map((d, i) => {
                  return (
@@ -54,7 +73,9 @@ export default class Earth extends React.Component<Props, State> {
                     <Image name={d.name} id={d.id} show={this.state.imagesshow[i]} image={d.image}/>
                     );
                 })}
-                <form id="makiko">
+                <LISTMENU>
+               <Package>
+               <form id="imagelist1">
                     <ul>
                         {this.props.pins.map((d, i) => {
                         return (
@@ -72,7 +93,9 @@ export default class Earth extends React.Component<Props, State> {
                         );
                         })}
                     </ul>
-                </form>
+                    </form>
+                </Package>
+                <Package1>
                 <form id="imagelist">
                     <ul>
                         {this.props.images.map((d, i) => {
@@ -92,6 +115,8 @@ export default class Earth extends React.Component<Props, State> {
                         })}
                     </ul>
                 </form>
+                </Package1>
+                </LISTMENU>
             </Viewer>
         );
     }

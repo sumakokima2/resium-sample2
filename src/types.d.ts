@@ -37,8 +37,3 @@ declare module "*.css" {
   };
   export default css;
 }
-
-interface Data {
-  id: string;
-  name: string;
-}

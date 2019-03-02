@@ -3,23 +3,36 @@ import { hot } from "react-hot-loader";
 import { Cartesian3 } from "cesium";
 import { Viewer, Entity } from "resium";
 
-export default class Pin extends React.Component<any, any> {
+interface Props {
+    name: string;
+    show: boolean;
+    id: string;
+    lon: number;
+    lat: number;
+  }
+
+export default class Pin extends React.Component<Props, any> {
     constructor(props: any){
         super(props);
-        this.state = { name: this.props.name };
     }
 
-    public handleChange(event: any) : void {
-        this.setState({ name: "Charles" });
-    }
+    componentDidMount() {
+//        alert(this.props.show);
+      }
+
 
     public render() {
+       
+
+        console.log(this.props.show);
         return (
             <Entity
-            name= { this.state.name }
-            position={Cartesian3.fromDegrees(139.767052, 35.681167, 100)}
+            name= { this.props.name }
+            position={Cartesian3.fromDegrees(this.props.lon, 30, 100)}
             point={{ pixelSize: 10 }}
             description="hoge"
+            show={this.props.show}
+
           />
         );
     }

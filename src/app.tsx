@@ -9,6 +9,8 @@ interface Data {
   id: string;
   name: string;
   show: boolean;
+  lon: number;
+  lat: number;
 }
 
 interface ImageData {
@@ -37,7 +39,7 @@ class App extends React.PureComponent<{}, State> {
 
   async loadData() {
     const result = await loadData();
-    this.setState({
+    this.setState({ 
       data: result.data,
     });
   }

@@ -1,6 +1,3 @@
-
-
-
 export default async function loadData() {
   const data = await fetch("src/data_app.csv", {
       credentials: "same-origin",
@@ -15,7 +12,9 @@ export default async function loadData() {
     data: csv.map((d, i) => ({
       id: i.toString(),
       name: d[1],
-      show:true
+      show:true,
+      lon: parseFloat(d[2]),
+      lat: parseFloat(d[3])
     }))
   };
 }
